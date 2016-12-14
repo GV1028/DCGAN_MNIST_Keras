@@ -140,18 +140,4 @@ for e in range(nb_epochs):
 		plotlosses(gan_loss,dis_loss,e)
 		plot_gen(number = e)
 		
-def plot_real(n_ex=16,dim=(4,4), figsize=(10,10) ):
-    
-    idx = np.random.randint(0,X_train.shape[0],n_ex)
-    generated_images = X_train[idx,:,:]
 
-    plt.figure(figsize=figsize)
-    for i in range(generated_images.shape[0]):
-        plt.subplot(dim[0],dim[1],i+1)
-        img = generated_images[i,0,:,:]
-        plt.imshow(img)
-        plt.axis('off')
-    plt.tight_layout()
-    plt.show()
-
-plot_real()    

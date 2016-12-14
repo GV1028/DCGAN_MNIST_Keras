@@ -20,32 +20,6 @@ import matplotlib.pyplot as plt
 
 
 
-def plotlosses(gen_loss,dis_loss,i):
-	plt.figure(figsize=(10,10))
-	plt.plot(gen_loss,label="generative loss")
-	plt.plot(dis_loss,label="discriminative loss")	
-	plt.legend()
-	#plt.show()
-	plt.savefig('/home/vignesh/Desktop/GAN/lossimages/loss-' + str(i) + '.png')#, bbox_inches='tight')
-	plt.clf()
-	plt.close()
-
-def plot_gen(n_ex=16,dim=(4,4), figsize=(10,10),number=0):
-    noise = np.random.uniform(-1,1,size=[n_ex,128])
-    generated_images = generator.predict(noise)
-
-    plt.figure(figsize=figsize)
-    for i in range(generated_images.shape[0]):
-        plt.subplot(dim[0],dim[1],i+1)
-        img = generated_images[i,0,:,:]
-        plt.imshow(img)
-        plt.axis('off')
-    plt.tight_layout()
-    #plt.show()
-    plt.savefig('/home/vignesh/Desktop/GAN/genimages/gen-' + str(number) + '.png')
-    plt.clf()
-    plt.close()
-
 generator = Sequential()
 generator.add(Dense(input_dim=128,output_dim=1024,init='glorot_normal'))
 generator.add(BatchNormalization())
@@ -140,18 +114,4 @@ for e in range(nb_epochs):
 		plotlosses(gan_loss,dis_loss,e)
 		plot_gen(number = e)
 		
-def plot_real(n_ex=16,dim=(4,4), figsize=(10,10) ):
-    
-    idx = np.random.randint(0,X_train.shape[0],n_ex)
-    generated_images = X_train[idx,:,:]
 
-    plt.figure(figsize=figsize)
-    for i in range(generated_images.shape[0]):
-        plt.subplot(dim[0],dim[1],i+1)
-        img = generated_images[i,:,:]
-        plt.imshow(img)
-        plt.axis('off')
-    plt.tight_layout()
-    plt.show()
-
-plot_real()    
